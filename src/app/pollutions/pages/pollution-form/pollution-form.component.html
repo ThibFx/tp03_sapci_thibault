@@ -1,0 +1,86 @@
+<section class="pollution-form">
+  <header class="pollution-form__header">
+    <div>
+      <h1>{{ isEditing() ? 'Modifier une pollution' : 'Nouvelle pollution' }}</h1>
+      <p class="hint">
+        Renseignez un signalement complet pour suivre la pollution dans le temps.
+      </p>
+    </div>
+    <a class="btn" routerLink="/pollutions">Retour à la liste</a>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="grid">
+      <label>
+        Nom du signalement
+        <input type="text" formControlName="name" placeholder="Ex. Pollution industrielle" />
+        <span *ngIf="form.controls.name.invalid && form.controls.name.touched" class="error">
+          Le nom est requis (3 caractères minimum).
+        </span>
+      </label>
+
+      <label>
+        Ville
+        <input type="text" formControlName="city" placeholder="Paris, Lyon…" />
+        <span *ngIf="form.controls.city.invalid && form.controls.city.touched" class="error">
+          La ville est obligatoire.
+        </span>
+      </label>
+
+      <label>
+        Type
+        <select formControlName="type">
+          <option *ngFor="let option of pollutionTypes" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        Statut
+        <select formControlName="status">
+          <option *ngFor="let option of statuses" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        Niveau mesuré
+        <input type="number" min="0" formControlName="level" />
+        <span *ngIf="form.controls.level.invalid && form.controls.level.touched" class="error">
+          Le niveau doit être positif.
+        </span>
+      </label>
+
+      <label>
+        Date d'enregistrement
+        <input type="date" formControlName="recordedAt" />
+        <span *ngIf="form.controls.recordedAt.invalid && form.controls.recordedAt.touched" class="error">
+          La date est obligatoire.
+        </span>
+      </label>
+    </div>
+
+    <label class="full">
+      Description
+      <textarea formControlName="description" rows="5" placeholder="Décrivez le contexte, les causes possibles…"></textarea>
+      <span *ngIf="form.controls.description.invalid && form.controls.description.touched" class="error">
+        La description est nécessaire (10 caractères minimum).
+      </span>
+    </label>
+
+    <div *ngIf="error()" class="alert error">
+      {{ error() }}
+    </div>
+
+    <footer class="actions">
+      <button type="submit" class="btn primary" [disabled]="isSubmitting()">
+        {{ isEditing() ? 'Mettre à jour' : 'Créer' }}
+      </button>
+      <button type="button" class="btn" [disabled]="isSubmitting()" (click)="form.reset(form.getRawValue())">
+        Réinitialiser
+      </button>
+    </footer>
+  </form>
+</section>

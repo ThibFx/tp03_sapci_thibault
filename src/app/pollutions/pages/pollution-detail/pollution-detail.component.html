@@ -1,0 +1,54 @@
+<section class="pollution-detail" *ngIf="!isLoading(); else loadingTpl">
+  <ng-container *ngIf="!error(); else errorTpl">
+    <ng-container *ngIf="pollution(); else emptyTpl">
+      <header class="pollution-detail__header">
+        <div>
+          <h1>{{ pollution()?.name }}</h1>
+          <p class="hint">Signalement enregistré le {{ pollution()?.recordedAt | date: 'longDate' }}</p>
+        </div>
+        <nav>
+          <a class="btn" routerLink="/pollutions">Retour à la liste</a>
+          <a class="btn primary" [routerLink]="['/pollutions', pollution()?.id, 'edit']">Modifier</a>
+        </nav>
+      </header>
+
+      <dl class="pollution-detail__grid">
+        <div>
+          <dt>Type</dt>
+          <dd>{{ pollution()?.type | titlecase }}</dd>
+        </div>
+        <div>
+          <dt>Ville</dt>
+          <dd>{{ pollution()?.city }}</dd>
+        </div>
+        <div>
+          <dt>Niveau</dt>
+          <dd>{{ pollution()?.level }}</dd>
+        </div>
+        <div>
+          <dt>Statut</dt>
+          <dd class="status" [attr.data-status]="pollution()?.status">
+            {{ pollution()?.status | titlecase }}
+          </dd>
+        </div>
+      </dl>
+
+      <article class="pollution-detail__description">
+        <h2>Description</h2>
+        <p>{{ pollution()?.description }}</p>
+      </article>
+    </ng-container>
+  </ng-container>
+</section>
+
+<ng-template #loadingTpl>
+  <p class="info">Chargement de la pollution…</p>
+</ng-template>
+
+<ng-template #errorTpl>
+  <div class="alert error">{{ error() }}</div>
+</ng-template>
+
+<ng-template #emptyTpl>
+  <div class="alert">Aucune information disponible.</div>
+</ng-template>
