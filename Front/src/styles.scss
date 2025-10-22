@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0f172a;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #0f172a;
+  background: transparent;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+a {
+  color: inherit;
+}
+
+table {
+  width: 100%;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  left: -50%;
+  width: 200%;
+  height: 35vh;
+  background-image: url('/wave.svg');
+  background-repeat: repeat-x;
+  background-size: 45% 100%;
+  background-position: center bottom;
+  z-index: 0;
+  animation: wave-drift 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 25%, #000 75%, rgba(0, 0, 0, 0) 100%);
+  transform: translateZ(0);
+}
+
+body::before {
+  bottom: 12vh;
+  opacity: 0.55;
+  animation-duration: 22s;
+  animation-delay: -6s;
+}
+
+body::after {
+  bottom: 6vh;
+  opacity: 0.85;
+  animation-duration: 14s;
+  animation-delay: -2s;
+  animation-direction: alternate-reverse;
+  filter: blur(1px);
+}
+
+@keyframes wave-drift {
+  from {
+    transform: translateX(-18%);
+  }
+
+  to {
+    transform: translateX(18%);
+  }
+}
