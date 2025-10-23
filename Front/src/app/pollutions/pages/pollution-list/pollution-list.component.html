@@ -1,0 +1,85 @@
+<section class="pollution-list">
+  <header class="pollution-list__header">
+    <div>
+      <h1>Gestion des pollutions</h1>
+      <p class="hint">
+        Suivez les signalements et filtrez les résultats selon vos critères.
+      </p>
+    </div>
+    <nav>
+      <a class="btn primary" routerLink="/pollutions/new">Nouvelle pollution</a>
+      <button type="button" class="btn" (click)="refresh()">Rafraîchir</button>
+    </nav>
+  </header>
+
+  <form class="filters" [formGroup]="filterForm">
+    <label>
+      Recherche
+      <input type="text" formControlName="search" placeholder="Nom ou description" />
+    </label>
+    <label>
+      Type
+      <select formControlName="type">
+        <option value="">Tous</option>
+        <option *ngFor="let option of pollutionTypes" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </label>
+    <label>
+      Ville
+      <input type="text" formControlName="city" placeholder="Ville" />
+    </label>
+    <label>
+      Statut
+      <select formControlName="status">
+        <option value="">Tous</option>
+        <option *ngFor="let option of statuses" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </label>
+  </form>
+
+  <div *ngIf="error() as message" class="alert error">{{ message }}</div>
+  <div *ngIf="isLoading()" class="loading">Chargement des données…</div>
+
+  <table *ngIf="!isLoading() && hasResults(); else empty" class="results">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Ville</th>
+        <th>Statut</th>
+        <th>Enregistré le</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pollution of pollutions(); trackBy: trackByPollutionId">
+        <td>
+          <a [routerLink]="['/pollutions', pollution.id]">
+            {{ pollution.name }}
+          </a>
+        </td>
+        <td>{{ getTypeLabel(pollution.type) }}</td>
+        <td>{{ pollution.city }}</td>
+        <td>
+          <span class="status" [attr.data-status]="pollution.status">{{ getStatusLabel(pollution.status) }}</span>
+        </td>
+        <td>{{ pollution.recordedAt | date: 'shortDate' }}</td>
+        <td class="actions">
+          <a class="btn link" [routerLink]="['/pollutions', pollution.id, 'edit']">Modifier</a>
+          <button type="button" class="btn danger" (click)="onDelete(pollution)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <div class="empty-state">
+      <p>Aucun résultat ne correspond à votre recherche.</p>
+      <p>Ajoutez une pollution ou ajustez les filtres.</p>
+    </div>
+  </ng-template>
+</section>
