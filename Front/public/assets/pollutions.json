@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "name": "Usine chimique de la zone Nord",
+    "type": "chemical",
+    "city": "Lyon",
+    "recordedAt": "2024-02-15T09:20:00Z",
+    "status": "investigating",
+    "description": "Des pics répétés de dioxyde de soufre ont été détectés autour de l'usine chimique depuis début février."
+  },
+  {
+    "id": "2",
+    "name": "Déchets plastiques sur la plage de Malo",
+    "type": "plastic",
+    "city": "Dunkerque",
+    "recordedAt": "2024-03-08T08:10:00Z",
+    "status": "open",
+    "description": "Accumulation de filets, de bouteilles et de microplastiques sur 500 mètres de littoral après une tempête."
+  },
+  {
+    "id": "3",
+    "name": "Déversement dans la rivière Clarin",
+    "type": "water",
+    "city": "Nantes",
+    "recordedAt": "2024-03-04T11:00:00Z",
+    "status": "open",
+    "description": "Un film huileux recouvre la surface de la rivière, avec mortalité de poissons observée sur 300 mètres."
+  },
+  {
+    "id": "4",
+    "name": "Décharge sauvage forêt de Verrières",
+    "type": "wild_dumping",
+    "city": "Versailles",
+    "recordedAt": "2024-01-28T14:30:00Z",
+    "status": "open",
+    "description": "Accumulation de déchets industriels près d’un site Natura 2000 avec risques de lixiviation."
+  },
+  {
+    "id": "5",
+    "name": "Bruit nocturne zone logistique",
+    "type": "air",
+    "city": "Lille",
+    "recordedAt": "2024-02-22T22:15:00Z",
+    "status": "investigating",
+    "description": "Des convois nocturnes dépassent les niveaux réglementaires de bruit entre 22h et 2h."
+  },
+  {
+    "id": "6",
+    "name": "Pesticides dans les cultures",
+    "type": "other",
+    "city": "Bordeaux",
+    "recordedAt": "2024-03-10T07:45:00Z",
+    "status": "resolved",
+    "description": "Dépassement ponctuel de résidus de pesticides dans les cultures viticoles, mesures correctives appliquées."
+  }
+]
